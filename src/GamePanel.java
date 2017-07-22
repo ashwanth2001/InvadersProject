@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -19,6 +22,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Rocketship ship;
 	ObjectManager manager;
+	public static BufferedImage alienImg;
+	public static BufferedImage rocketImg;
+	public static BufferedImage bulletImg;
 
 	// GameObject object;
 	public void updateMenuState() {
@@ -29,6 +35,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// ship.update();
 		manager.update();
 		manager.manageEnemies();
+		manager.checkCollision();
+		if (ship.isAlive) {
+		} else {
+			currentState = END_STATE;
+			manager.reset();
+			ship = new Rocketship(ship.x, ship.y, ship.width, ship.height, ship.speed);
+			manager.addObject(ship);
+		}
 	}
 
 	public void updateEndState() {
@@ -48,6 +62,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, 500, 800);
 		// ship.draw(g);
 		manager.draw(g);
+		int score = manager.getScore();
+		g.setColor(Color.YELLOW);
+		g.setFont(titleFont);
+		g.drawString(new Integer(score).toString(), 50, 50);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -77,9 +95,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		timer = new Timer(repeat, this);
 		// object = new GameObject();
 		titleFont = new Font("Arial", Font.PLAIN, 48);
-		ship = new Rocketship(250, 700, 50, 50, 5);
+		ship = new Rocketship(250, 700, 50, 50, 20);
 		manager = new ObjectManager();
 		manager.addObject(ship);
+		try {
+			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	void startGame() {
