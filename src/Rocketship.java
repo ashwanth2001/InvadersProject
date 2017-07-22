@@ -20,6 +20,6 @@ public class Rocketship extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
+		g.drawImage(GamePanel.trumpImg, x, y, width, height, null);
 	}
 }
