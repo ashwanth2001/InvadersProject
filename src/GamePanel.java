@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage bulletImg;
 	public static BufferedImage cnnImg;
 	public static BufferedImage trumpImg;
+	public static BufferedImage johnnyImg;
 
 	// GameObject object;
 	public void updateMenuState() {
@@ -106,7 +107,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
 			cnnImg = ImageIO.read(this.getClass().getResourceAsStream("Cnn.png"));
 			trumpImg = ImageIO.read(this.getClass().getResourceAsStream("trump.png"));
-
+			johnnyImg = ImageIO.read(this.getClass().getResourceAsStream("HeresJohnny.png"));
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -20,6 +19,6 @@ public class Alien extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.drawImage(GamePanel.cnnImg, x, y, width, height, null);
+		g.drawImage(GamePanel.johnnyImg, x, y, width, height, null);
 	}
 }
